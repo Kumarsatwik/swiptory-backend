@@ -25,7 +25,11 @@ const register = async (req, res, next) => {
       expiresIn: "1h",
     });
 
-    res.status(201).json({ token, username, message: "User has been created" });
+    res.status(201).json({
+      token,
+      user: { username: newUser.username, userId: newUser._id },
+      message: "User has been created",
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Something went wrong" });
